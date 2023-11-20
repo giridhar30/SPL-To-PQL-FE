@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/sql-to-pql-fe'),
+      dir: require('path').join(__dirname, './coverage/spl-to-pql-fe'),
       subdir: '.',
       reporters: [
         { type: 'html' },

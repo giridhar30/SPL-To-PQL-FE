@@ -1,0 +1,29 @@
+<div class="sub-header-container">
+    <div class="sub-header-contents">
+        <div class="title">
+            SPLUNK SPL -> PQL CONVERTER
+        </div>
+        <div class="reset" (click)="reset()">RESET</div>
+    </div>
+</div>
+<div class="box">
+    <div class="inline-box form-group text-left">
+        <span class="bold">Input Query</span>
+        <textarea [(ngModel)]="inputQuery" cols="30" rows="10" class="form-control"></textarea>
+        <span class="bold">Preset</span>
+        <select [(ngModel)]="preset" class="select-picker">
+            <option *ngFor="let presetName of presetNames" [value]="presetName" [selected]="presetName == '| dataset'">{{presetName}}</option>
+        </select>
+        <div class="text-center">
+            <button class="btn btn-orange mt-3" (click)="submitQuery()">CONVERT</button>
+        </div>
+    </div>
+    
+    <div class="inline-box output">
+        <div *ngIf="loading" class="spinner-border text-orange spinner" role="status">
+            <span class="sr-only"></span>
+        </div>
+        <span class="bold">Output Query</span>
+        <textarea disabled cols="30" rows="10" class="form-control">{{ outputQuery.pql_code }}</textarea>
+    </div>
+</div>
