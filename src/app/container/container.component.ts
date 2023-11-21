@@ -38,9 +38,18 @@ export class ContainerComponent implements OnInit {
       return;
     }
     let apiRequest: ApiRequest = {spl_code: this.inputQuery, preset: this.preset};
-    this.converterService.convertSPL(apiRequest).subscribe(pql => {
-      this.loading = false;
-      this.outputQuery = pql
+    this.converterService.convertSPL(apiRequest).subscribe({
+      next : pql => {
+        this.loading = false;
+        this.outputQuery = pql
+      },
+      error: err => {
+        Swal.fire({
+          icon: "error",
+          title: "Error!",
+          text: err
+        });
+      }
     });
   }
 

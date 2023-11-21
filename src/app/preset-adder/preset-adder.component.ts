@@ -71,22 +71,31 @@ export class PresetAdderComponent implements OnInit {
       return;
     }
 
-    this.presetService.postPreset(this.presetName, messages).subscribe(response => {
-      if (response.success == 'true') {
-        Swal.fire({
-          icon: "success",
-          title: "Success!",
-          text: response.message
-        });
-        this.presetNames.push(this.presetName);
-        this.reset();
-      } else {
+    this.presetService.postPreset(this.presetName, messages).subscribe({
+      next: response => {
+        if (response.success == 'true') {
+          Swal.fire({
+            icon: "success",
+            title: "Success!",
+            text: response.message
+          });
+          this.presetNames.push(this.presetName);
+          this.reset();
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Error!",
+            text: response.message
+          });
+          this.reset();
+        }
+      },
+      error: err => {
         Swal.fire({
           icon: "error",
           title: "Error!",
-          text: response.message
+          text: err
         });
-        this.reset();
       }
     });
     
