@@ -73,7 +73,7 @@ export class PresetAdderComponent implements OnInit {
 
     this.presetService.postPreset(this.presetName, messages).subscribe({
       next: response => {
-        if (response.success == 'true') {
+        if (response.success == true) {
           Swal.fire({
             icon: "success",
             title: "Success!",
@@ -82,6 +82,8 @@ export class PresetAdderComponent implements OnInit {
           this.presetNames.push(this.presetName);
           this.reset();
         } else {
+          console.log(response);
+          
           Swal.fire({
             icon: "error",
             title: "Error!",
